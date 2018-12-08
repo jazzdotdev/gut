@@ -58,8 +58,17 @@ end
 
 -- apply patch
 function Series:push(filename)
-	
+
+	--[[
 	if string.sub(filename, 1, 1) ~= "/" then
+		return "path to patch file must be absolute"
+	end
+	--]]
+	if string.sub(filename, 1, 1) ~= "/" then
+		filename = self.dir .. "/" .. filename
+	end
+	filename = fs.canonicalize(filename)
+	if filename == nil then
 		return "path to patch file must be absolute"
 	end
 

@@ -1,7 +1,12 @@
-#!/usr/bin/env lua
-
 local Series = require("series")
-local series = Series:new("test")
+
+
+local pwd = os.getenv("GUT_PWD")
+local cmd = os.getenv("GUT_CMD")
+local arg = os.getenv("GUT_ARG")
+
+
+local series = Series:new(pwd)
 
 local actions = {
 
@@ -28,9 +33,6 @@ local actions = {
 		return series:pop(arg)
 	end
 }
-
-local cmd = os.getenv("GUT_CMD")
-local arg = os.getenv("GUT_ARG")
 
 if type(actions[cmd]) ~= "function" then
 	error("unknown command " .. tostring(cmd))
