@@ -1,37 +1,4 @@
-#!/usr/bin/env lua
-
-local Series = require("series")
-local series = Series:new("test")
-
-local actions = {
-
-	series = function()
-		local series, err = series:series()
-		if err ~= nil then
-			return err
-		end
-
-		for i, filename in ipairs(series) do
-			print(filename)
-		end
-	end,
-	
-	push = function(arg)
-		return series:push(arg[1])
-	end,
-	
-	pop = function(arg)
-		return series:pop(arg[1])
-	end
-}
-
-local cmd = table.remove(arg, 1)
-
-if type(actions[cmd]) ~= "function" then
-	error("unknown command " .. tostring(cmd))
-end
-
-local err = actions[cmd](arg)
-if err ~= nil then
-	error(err)
-end
+#!/bin/sh
+export GUT_CMD="$1"
+export GUT_ARG="$2"
+exec torchbear
