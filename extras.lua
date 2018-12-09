@@ -9,7 +9,7 @@ local execute = require"execute"
 local path_separator = "/"
 
 function fs.remove_recursive(dir)
-	return execute{"rm", "-rf", dir}
+	return execute{"rm", "-rf", dir}:run()
 end
 
 function fs.join(...)
@@ -27,5 +27,9 @@ function fs.abs(...)
 end
 
 function fs.mklink(src, dest)
-	return execute{"ln", "-s", src, dest}
+	return execute{"ln", "-s", src, dest}:run()
+end
+
+function fs.touch(filename)
+	return execute{"touch", filename}:run()
 end

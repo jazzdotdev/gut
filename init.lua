@@ -23,16 +23,46 @@ local commands = {
 		return gut:start()
 	end,
 
-	save = function()
-		return gut:savecurrent()
+	save = function(arg)
+		return gut:savepatch(arg)
 	end,
 
 	diff = function()
 		return gut:diff()
 	end,
 
-	apply = function()
-		return gut:apply()
+	patches = function()
+		-- list patches
+		local patches, err = gut:patches()
+		if err then return err end
+		
+		for filename in patches do
+			print(filename)
+		end
+	end,
+
+	series = function()
+		-- list series of patches
+		local series, err = gut:series()
+		if err then return err end
+		local index, err = gut:index()
+		if err then return err end
+
+		for i, filename in ipairs(series) do
+			if filename == index then
+				print(filename .. " (index)")
+			else
+				print(filename)
+			end
+		end
+	end,
+
+	backward = function()
+		return gut:backward()
+	end,
+
+	forward = function()
+		return gut:forward()
 	end
 }
 
@@ -40,7 +70,11 @@ if type(commands[cmd]) ~= "function" then
 	die([[usage:
   gut start
   gut save
-  gut diff]])
+  gut diff
+  gut patches
+  gut series
+  gut backward
+  gut forward]])
 end
 
 if cmd ~= "start" and not gut:isrepo() then
