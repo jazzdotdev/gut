@@ -141,9 +141,9 @@ function Gut:diff()
 	end
 
 	if fs.exists(fs.join(self.dir, ignorefile)) then
-		self:execute{"diff", "--color=auto", "-X", fs.join("..", ignorefile), "-Nur", "a", "b"}
+		self:execute{"diff", "--text", "--color=auto", "-X", fs.join("..", ignorefile), "-Nur", "a", "b"}
 	else
-		self:execute{"diff", "--color=auto", "-Nur", "a", "b"}
+		self:execute{"diff", "--text", "--color=auto", "-Nur", "a", "b"}
 	end
 end
 
