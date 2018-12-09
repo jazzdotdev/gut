@@ -6,6 +6,6 @@ export GUT_PWD="$(pwd)"
 export GUT_CMD="$1"
 export GUT_ARG="$2"
 
-cd /home/user/x/gut
+cd "$(dirname "$(realpath "$0")")"
 
 exec torchbear

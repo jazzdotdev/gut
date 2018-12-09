@@ -1,44 +1,52 @@
-local Series = require("series")
-
+local Gut = require("gut")
 
 local pwd = os.getenv("GUT_PWD")
 local cmd = os.getenv("GUT_CMD")
 local arg = os.getenv("GUT_ARG")
 
+local function die(msg)
+	io.stderr:write(msg)
+	if string.sub(msg, #msg) ~= "\n" then
+		io.stderr:write("\n")
+	end
+	os.exit(1)
+end
 
-local series = Series:new(pwd)
+local gut, err = Gut:new(pwd)
+if err then
+	die(err)
+end
 
-local actions = {
-
-	init = function() end,
-
-	status = function() end,
-
-	series = function()
-		local series, err = series:series()
-		if err ~= nil then
-			return err
-		end
-
-		for i, filename in ipairs(series) do
-			print(filename)
-		end
-	end,
+local commands = {
 	
-	push = function(arg)
-		return series:push(arg)
+	start = function()
+		return gut:start()
 	end,
-	
-	pop = function(arg)
-		return series:pop(arg)
+
+	save = function()
+		return gut:savecurrent()
+	end,
+
+	diff = function()
+		return gut:diff()
+	end,
+
+	apply = function()
+		return gut:apply()
 	end
 }
 
-if type(actions[cmd]) ~= "function" then
-	error("unknown command " .. tostring(cmd))
+if type(commands[cmd]) ~= "function" then
+	die([[usage:
+  gut start
+  gut diff]])
 end
 
-local err = actions[cmd](arg)
+if cmd ~= "start" and not gut:isrepo() then
+	die("not a gut repo")
+end
+
+local err = commands[cmd](arg)
 if err ~= nil then
-	error(err)
+	die(err)
 end
