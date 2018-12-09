@@ -4,6 +4,7 @@ local escape = require"escape"
 
 local Gut = {}
 local gutdir = ".gut"
+local ignorefile = ".gutignore"
 
 function Gut:new(dir)
 	local dir, err = fs.abs(dir)
@@ -48,11 +49,11 @@ function Gut:entries()
 end
 
 function Gut:execute(cmd)
-	return execute{
-		"sh",
-		"-c",
-		escape{"cd", self.gutdir} .. " && " .. escape(cmd)
-	}
+	return execute(escape{"cd", self.gutdir} .. " && " .. escape(cmd))
+end
+
+function Gut:executerepo(cmd)
+	return execute(escape{"cd", self.dir} .. " && " .. escape(cmd))
 end
 
 function Gut:savecurrent()
@@ -139,11 +140,15 @@ function Gut:diff()
 		end
 	end
 
-	self:execute{"diff", "--color=auto", "-Nur", "a", "b"}
+	if fs.exists(fs.join(self.dir, ignorefile)) then
+		self:execute{"diff", "--color=auto", "-X", fs.join("..", ignorefile), "-Nur", "a", "b"}
+	else
+		self:execute{"diff", "--color=auto", "-Nur", "a", "b"}
+	end
 end
 
 function Gut:apply()
-	return self:execute{"patch", "-p1"}
+	return self:executerepo{"patch", "-p1"}
 end
 
 return Gut
