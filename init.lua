@@ -39,6 +39,7 @@ local commands = {
 if type(commands[cmd]) ~= "function" then
 	die([[usage:
   gut start
+  gut save
   gut diff]])
 end
 
