@@ -4,7 +4,7 @@ local escape = require"escape"
 
 local Gut = {}
 local gutdir = ".gut"
-local ignorefile = ".gutignore"
+local omitfile = ".gutomit"
 
 function Gut:new(dir)
 	local dir, err = fs.abs(dir)
@@ -143,8 +143,8 @@ function Gut:diff(file)
 	end
 
 	local cmd
-	if fs.exists(fs.join(self.dir, ignorefile)) then
-		cmd = self:execute{"diff", "--text", "--color=auto", "-X", fs.join("..", ignorefile), "-Nur", "a", "b"}
+	if fs.exists(fs.join(self.dir, omitfile)) then
+		cmd = self:execute{"diff", "--text", "--color=auto", "-X", fs.join("..", omitfile), "-Nur", "a", "b"}
 	else
 		cmd = self:execute{"diff", "--text", "--color=auto", "-Nur", "a", "b"}
 	end
