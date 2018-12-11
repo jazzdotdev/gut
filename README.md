@@ -9,3 +9,4 @@
 * `gut patches` -- show patches directory
 * `gut series` -- show current chain of patches
 * `gut forward|backward` -- navigate the chain of patches
+* .gutomit - leave out files from patches
