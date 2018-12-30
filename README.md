@@ -3,9 +3,9 @@
 
 # gut
 
-* `gut start` -- initialize repo
-* `gut save` -- save current repo files
-* `gut diff` -- changes since last repo save
+* `gut start` -- begin tracking project
+* `gut save` -- save current project files
+* `gut diff` -- see changes since last save
 * `gut patches` -- show patches directory
 * `gut series` -- show current chain of patches
 * `gut forward|backward` -- navigate the chain of patches
