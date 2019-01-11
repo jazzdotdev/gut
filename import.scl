@@ -1,0 +1,8 @@
+imports = {
+	torchbear-libs = "third-party/",
+}
+
+torchbear-libs = {
+	url = "https://github.com/foundpatterns/torchbear-libs",
+	repo = true,
+}

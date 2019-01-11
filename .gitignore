@@ -1,3 +1,6 @@
 *.bak
 /gut.sh
 /log
+/third-party
+/.gut
+/.mp
