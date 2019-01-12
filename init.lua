@@ -1,8 +1,12 @@
+#!/usr/bin/env torchbear
 local Gut = require("gut")
 
-local pwd = os.getenv("GUT_PWD")
-local cmd = os.getenv("GUT_CMD")
-local arg = os.getenv("GUT_ARG")
+-- discarding
+table.remove(arg, 1)
+
+local pwd = fs.current_dir()
+local cmd = table.remove(arg, 1)
+local arg = table.remove(arg, 1) 
 
 local function die(msg)
 	io.stderr:write(msg)
