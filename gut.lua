@@ -1,4 +1,5 @@
 require 'third-party/path_separator'
+require 'third-party/sanitize'
 require 'third-party/join'
 require 'third-party/mklink'
 require 'third-party/abs'
