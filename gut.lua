@@ -3,6 +3,7 @@ require 'third-party/sanitize'
 require 'third-party/join'
 require 'third-party/mklink'
 require 'third-party/abs'
+require 'third-party/remove_recursive'
 
 local execute = require"execute"
 local escape = require"escape"
@@ -10,6 +11,8 @@ local escape = require"escape"
 local Gut = {}
 local gutdir = ".gut"
 local omitfile = ".gutomit"
+
+local excluded = {".git", ".gut", ".mp", ".gitignore", ".gutomit", "log"}
 
 function Gut:new(dir)
 	local dir, err = fs.abs(dir)
@@ -343,6 +346,24 @@ function Gut:forward()
 
 	err = self:savecurrent()
 	if err then return err end
+end
+
+function Gut:validate()
+	local master_hash = fs.read_file(fs.join(self.gutdir, "mainline"))
+	local dir_hash = crypto.checksumdir(".", excluded)
+	if dir_hash == master_hash then 
+		return true
+	else
+		return false
+	end
+end
+
+function Gut:check() 
+	if Gut:validate() then
+		print("Up to date")
+	else
+		print("Files are not in sync")
+	end
 end
 
 return Gut

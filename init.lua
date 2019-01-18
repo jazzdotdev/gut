@@ -67,7 +67,11 @@ local commands = {
 
 	forward = function()
 		return gut:forward()
-	end
+	end,
+
+	check = function()
+		return gut:check()
+	end,
 }
 
 if type(commands[cmd]) ~= "function" then
@@ -78,7 +82,8 @@ if type(commands[cmd]) ~= "function" then
   gut patches
   gut series
   gut backward
-  gut forward]])
+  gut forward
+  gut check]])
 end
 
 if cmd ~= "start" and not gut:isrepo() then
@@ -89,3 +94,4 @@ local err = commands[cmd](arg)
 if err ~= nil then
 	die(err)
 end
+
