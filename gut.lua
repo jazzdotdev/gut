@@ -348,18 +348,35 @@ function Gut:forward()
 	if err then return err end
 end
 
+function Gut:checksumdir()
+	local f, err = io.open(fs.join(self.gutdir, "mainline"), "w")
+	if err then return nil, err end
+
+	local hash = crypto.checksumdir(fs.join(self.gutdir, "current"), excluded)
+	-- TODO handle error
+	f:write(hash)
+	f:close()
+end
+
+
 function Gut:validate()
-	local master_hash = fs.read_file(fs.join(self.gutdir, "mainline"))
+	local mainline_file = fs.join(self.gutdir, "mainline")
+	if not fs.exists(mainline_file) then
+		self:checksumdir()
+	end
+
+	local master_hash = fs.read_file(mainline_file)
 	local dir_hash = crypto.checksumdir(".", excluded)
-	if dir_hash == master_hash then 
+
+	if dir_hash == master_hash then
 		return true
 	else
 		return false
 	end
 end
 
-function Gut:check() 
-	if Gut:validate() then
+function Gut:check()
+	if self:validate() then
 		print("Up to date")
 	else
 		print("Files are not in sync")
