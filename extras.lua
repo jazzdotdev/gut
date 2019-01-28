@@ -13,7 +13,15 @@ function fs.remove_recursive(dir)
 end
 
 function fs.join(...)
-	return table.concat({...}, path_separator)
+	local chunks = {...}
+	if #chunks > 1 then
+		for i = #chunks, 1, -1 do
+			if chunks[i] == "." then
+				table.remove(chunks, i)
+			end
+		end
+	end
+	return table.concat(chunks, path_separator)
 end
 
 function fs.abs(...)
@@ -32,4 +40,11 @@ end
 
 function fs.touch(filename)
 	return execute{"touch", filename}:run()
+end
+
+function fs.mkdir(path, all)
+	if not fs.create_dir(path, all or false) then
+		return "failed to create directory"
+	end
+	return nil
 end
