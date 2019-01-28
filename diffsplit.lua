@@ -19,6 +19,11 @@ local function stringlines(str)
 	end
 end
 
+--[[
+diffsplit function splits multiple concatenated diff messages
+and returns iterator over them.
+--]]
+
 local function diffsplit(data, quirks)
 
 	local lines
