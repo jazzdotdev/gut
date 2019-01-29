@@ -4,8 +4,8 @@ return {
 	ignorefile = '.gutomit',
 
 	ignores = {
-		'^.gut$',
-		'^.git$',
-		'^.mp$',
+		'^\.gut$',
+		'^\.git$',
+		'^\.mp$',
 	}
 }
