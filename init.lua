@@ -22,10 +22,11 @@ local function usage(f)
 	f = f or io.stderr
 	f:write(
 		'usage:\n',
-		string.format('  %s start\n', argv0),
-		string.format('  %s status\n', argv0),
 		string.format('  %s diff\n', argv0),
 		string.format('  %s help\n', argv0)
+		string.format('  %s patch\n', argv0),
+		string.format('  %s start\n', argv0),
+		string.format('  %s status\n', argv0),
 	)
 	os.exit(f ~= io.stderr)
 end
@@ -35,7 +36,7 @@ local name = table.remove(arg, 1)
 local command = ({
 
 	diff =   require 'command/diff',
-	save =   require 'command/save',
+	save =   require 'command/patch',
 	start =  require 'command/start',
 	status = require 'command/status',
 
