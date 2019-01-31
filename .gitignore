@@ -1,4 +1,6 @@
 *.bak
+.gutomit
+gut
 /gut.sh
 /log
 /third-party
