@@ -1,6 +1,6 @@
 <p align="center"><img width="100" src="https://i.imgur.com/Vm9PyLX.png" alt="torchbear logo"></p>
 
-# gut
+# Gut
 
 * `gut start` -- begin tracking project
 * `gut save` -- save current project files
@@ -11,3 +11,8 @@
 * .gutomit - leave out files from patches
 
 this is a rough draft.  there's still a lot to do, within Torchbear and Rust libraries as well.
+
+## Installation
+
+* install [Torchbear](https://github.com/foundpatterns/torchbear)
+* run `mp install gut`
