@@ -8,6 +8,16 @@ When you want to start working on a new change, you can see how it fits into you
 
 When you want to make multiple lines of development with several changes in them, just add a new line while you have that current version.  From there, you can see what other changes have already been started, and use them, or you can start making your own change with new patches.
 
+## How Gut Works (not entirely implemented.  see current commands below)
+
+* `gut start` copies your current working directory to .gut/current/
+* // edit your files  //
+* `gut check`: show what's changed compared to "last prime" patch or other picked line -- uses hashes, checks sanity before running
+* `gut diff`: show differences
+* `gut patch`: creates the patch and add it to current change
+* `gut change`: a) show current change name and body (b) edit its name and body (c) show current patches (d) show which lines its on
+* `gut line`: (a) show current (b) list available (c) graph where they come from and others associated (d) switch lines
+
 ## Terms
 
 * patch: lines added and removed to one file or a group of files in a project 
@@ -18,16 +28,6 @@ When you want to make multiple lines of development with several changes in them
 * hash: blake2 of a file or dir
 * .gutomit: leave out files or directories from your project (ignore/exclude)
 * .gut/: directory that gut uses to run
-
-## How Gut Works
-
-* gut start copies your current working directory to .gut/current/
-* // edit your files  //
-* gut check: show what's changed compared to "last prime" patch or other picked line -- uses hashes, checks sanity before running
-* gut diff: show differences
-* gut patch: creates the patch and add it to current change
-* gut change: a) show current change name and body (b) edit its name and body (c) show current patches (d) show which lines its on
-* gut line: (a) show current (b) list available (c) graph where they come from and others associated (d) switch lines
 
 ## Current commands (this is a rough draft of the spec outlined above)
 
