@@ -1,5 +1,4 @@
-<p align="center"><img width="100" src="https://i.imgur.com/Vm9PyLX.png" alt="torchbear logo"><br>This Project is Currently in Stealth Mode.<br>please do not post a news story until v0.1 is released very shortly.<br>thank you.</p>
-
+<p align="center"><img width="100" src="https://i.imgur.com/Vm9PyLX.png" alt="torchbear logo"></p>
 
 # gut
 
