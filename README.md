@@ -10,7 +10,7 @@ When you want to make multiple lines of development with several changes in them
 
 ## How Gut Works (not entirely implemented.  see current commands below)
 
-* `gut start` copies your current working directory to .gut/current/
+* `gut start` copies your current working directory to `.gut/current/`
 * // edit your files  //
 * `gut check`: show what's changed compared to "last prime" patch or other picked line -- uses hashes, checks sanity before running
 * `gut diff`: show differences
